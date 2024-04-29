@@ -20,7 +20,7 @@ export class Api {
     }
 
     protected handleResponse(response: Response): Promise<object> {
-        if (response.ok) return response.json();
+        if (response.ok) return response.json();  // {total:10, items:[]}
         else return response.json()
             .then(data => Promise.reject(data.error ?? response.statusText));
     }
@@ -29,7 +29,7 @@ export class Api {
         return fetch(this.baseUrl + uri, {
             ...this.options,
             method: 'GET'
-        }).then(this.handleResponse);
+        }).then(this.handleResponse)
     }
 
     post(uri: string, data: object, method: ApiPostMethods = 'POST') {
