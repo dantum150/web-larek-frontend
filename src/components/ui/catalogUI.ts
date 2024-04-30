@@ -1,17 +1,23 @@
 import { Product } from "../buisness/productList"
-
+import { AllModal } from "./modalUI"
 export class CatalogUI {
     main: HTMLElement
     cardTemplate: HTMLTemplateElement
+    modal: AllModal
 
-    constructor() {
+    constructor(modal: AllModal) {
         this.main = document.querySelector('.gallery')
         this.cardTemplate = document.querySelector('#card-catalog')
+        this.modal = modal
     }
 
     renderCatalog(products: Product[]) {
         products.forEach((product) => {
             const card = this.createCard(product)
+            card.addEventListener('click', () => {
+                console.log(123)
+                this.modal.modalOpen(this.modal.cardModal)
+            })
             this.main.append(card)
         })
     }
@@ -32,6 +38,8 @@ export class CatalogUI {
         return cardContent
     }
 
+    
+
     addCategoryClass(category: string) {
         if(category === 'другое'){
             return 'card__category_other'
@@ -44,7 +52,7 @@ export class CatalogUI {
         else if(category === 'кнопка') {
             return 'card__category_button'
         }
-        else if(category === 'дополнительно') {
+        else if(category === 'дополнительное') {
             return 'card__category_additinal'
         }
         else {
