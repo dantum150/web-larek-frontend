@@ -15,9 +15,6 @@ const catalog = new CatalogUI(modal)
 // 2. В классе ProductList мы сохраняем массив с бэкенда
 // 3. Из класса ProductList мы должны будем передать массив карточек в 
 // класс CatalogUI, где будет фунция renderCatalog => отрисовка карточек
-
-
-
 // 4. Создать класс CatalogUI, gallery: main, renderCatalog: ( products) =>
 api.get('product').then((productsResponse: ApiListResponse<Product>) => {
     productList.products = productsResponse.items
@@ -27,3 +24,9 @@ api.get('product').then((productsResponse: ApiListResponse<Product>) => {
 
 console.log(modal)
 
+
+const basketButton = document.querySelector('.header__basket')
+basketButton.addEventListener('click', ()=> {
+modal.modalOpen(modal.basketModal)
+
+})

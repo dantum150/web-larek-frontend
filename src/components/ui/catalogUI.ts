@@ -22,8 +22,12 @@ export class CatalogUI {
         })
     }
 
+    // 1. кликает по карточке и получает информацию по карточке по которой произошел клик 
+    // 2. 
+
     createCard(product: Product) {
         const cardContent = this.cardTemplate.content.cloneNode(true) as HTMLButtonElement
+        const cardButton = cardContent.querySelector('.gallery__item')
         const category = cardContent.querySelector('.card__category')
         const title = cardContent.querySelector('.card__title')
         const price = cardContent.querySelector('.card__price')
@@ -35,8 +39,8 @@ export class CatalogUI {
         title.textContent = product.title
         price.textContent = `${product.price} синопсов`
 
-        return cardContent
-    }
+        return cardButton
+    }   
 
     
 

@@ -1,24 +1,33 @@
+import { Product } from "../buisness/productList"
+
 export class AllModal {
-    cardModal: Element
     modals: NodeListOf<Element>
+    cardModal: Element
+    basketModal: Element
     
     constructor() {
         this.modals = document.querySelectorAll('.modal')
         this.cardModal = this.modals[1]
+        this.basketModal = this.modals[2]
+    }
+
+    setModal(product:Product) {
+        const categoryModal = this.cardModal.querySelector('.card__category')
+        const titleModal = this.cardModal.querySelector('.card__title')
+        const textModal = this.cardModal.querySelector('.card__text')
+        const priceModal = this.cardModal.querySelector('.card__price')
+
+        categoryModal.textContent = product.category
+        titleModal.textContent = product.title
+        textModal.textContent = product.description
+        priceModal.textContent =  `${product.price} синопсов`      
     }
 
     modalOpen(modal: Element){
         modal.classList.add('modal_active')
     }
-
-    modalClose() {
-        // const allButtonClose = document.querySelectorAll('.modal__close')
-        // allButtonClose.forEach((button, index, array)=> {    
-        //     button.addEventListener('click', (event: any)=> {
-        //         event.target.parentElement.parentElement.classList.remove('modal_active')
-        //     })
-        // })
-        
+    
+    modalClose() {  
         this.modals.forEach((modal, index, array) => {
             const button = modal.querySelector('.modal__close')
 
@@ -29,8 +38,14 @@ export class AllModal {
             }
         })
     }
-
 }
+
+    
+
+
+
+
+
 
 // 1. Получить массив кнопок
 // 2. Циклом пробежаться по массиву
