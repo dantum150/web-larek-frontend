@@ -1,14 +1,18 @@
 import { Product } from "../buisness/productList"
-
-export class AllModal {
+import { GeneralUI } from "./GeneralUI"
+export class AllModal extends GeneralUI  {
+    modal: Element
     modals: NodeListOf<Element>
     cardModal: Element
     basketModal: Element
     
     constructor() {
+        super() 
+        this.modal = document.querySelector('#modal-container')
         this.modals = document.querySelectorAll('.modal')
-        this.cardModal = this.modals[1]
-        this.basketModal = this.modals[2]
+        this.cardModal = (document.querySelector('#card-preview') as HTMLTemplateElement).content.querySelector('.card_full')
+        this.basketModal = (document.querySelector('#basket') as HTMLTemplateElement).content.querySelector('.basket')
+        
     }
 
     setModal(product:Product) {
@@ -20,11 +24,15 @@ export class AllModal {
         categoryModal.textContent = product.category
         titleModal.textContent = product.title
         textModal.textContent = product.description
-        priceModal.textContent =  `${product.price} синопсов`      
+        priceModal.textContent = this.productPrice(product.price)
     }
 
+   
     modalOpen(modal: Element){
-        modal.classList.add('modal_active')
+        const modalContent = this.modal.querySelector('.modal__content')
+        modalContent.innerHTML = ''
+        modalContent.append(modal)
+        this.modal.classList.add('modal_active')
     }
     
     modalClose() {  

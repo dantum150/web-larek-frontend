@@ -1,22 +1,25 @@
 import { Product } from "../buisness/productList"
 import { AllModal } from "./modalUI"
-export class CatalogUI {
+import { GeneralUI } from "./GeneralUI"
+export class CatalogUI extends GeneralUI {
     main: HTMLElement
     cardTemplate: HTMLTemplateElement
-    modal: AllModal
 
-    constructor(modal: AllModal) {
+    constructor() {
+        super()
         this.main = document.querySelector('.gallery')
         this.cardTemplate = document.querySelector('#card-catalog')
-        this.modal = modal
     }
 
-    renderCatalog(products: Product[]) {
+    renderCatalog(products: Product[], funcClick: (productId: string) => void) {
         products.forEach((product) => {
             const card = this.createCard(product)
             card.addEventListener('click', () => {
-                console.log(123)
-                this.modal.modalOpen(this.modal.cardModal)
+                // 1. Сделать гет-запрос (productId) => product
+                // 2. Поместить наш объект в функцию setModal
+                // 3. Открытие модалки
+                // this.modal.modalOpen(this.modal.cardModal)
+                funcClick(product.id)      // api.get(`product/${productId}`)  => product  => setModal(product) => openModal(modal.cardModal)
             })
             this.main.append(card)
         })
@@ -25,7 +28,7 @@ export class CatalogUI {
     // 1. кликает по карточке и получает информацию по карточке по которой произошел клик 
     // 2. 
 
-    createCard(product: Product) {
+    createCard(product: Product) {  // {id, category,title,price, description}
         const cardContent = this.cardTemplate.content.cloneNode(true) as HTMLButtonElement
         const cardButton = cardContent.querySelector('.gallery__item')
         const category = cardContent.querySelector('.card__category')
@@ -37,12 +40,11 @@ export class CatalogUI {
 
         category.classList.add(this.addCategoryClass(product.category))
         title.textContent = product.title
-        price.textContent = `${product.price} синопсов`
+        price.textContent = this.productPrice(product.price)
 
         return cardButton
-    }   
+    }
 
-    
 
     addCategoryClass(category: string) {
         if(category === 'другое'){
