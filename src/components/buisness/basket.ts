@@ -1,16 +1,28 @@
 import { Product } from "./productList";
 
-export class Basket {
+export class Basket  {
     basketItems: Product []
+    selectedProduct: Product
     constructor() {
-        this.basketItems = []
+        this.basketItems = []   // {id price title p category}
     }
 
-    addBasket(product:Product){
-        this.basketItems.push(product)
+    addBasket(){
+        const foundBasketItem = this.basketItems.find((product) => product.id === this.selectedProduct.id)
+
+        if(!foundBasketItem) {
+            this.basketItems.push(this.selectedProduct)
+            return this.selectedProduct
+        }
+        return this.selectedProduct
     }
 
-    removeBasket(product:Product){
-        this.basketItems.filter
+    removeBasket(productID: string){
+        this.basketItems = this.basketItems.filter((product) => {
+           return product.id !== productID
+        })  
     }
 }
+
+    
+

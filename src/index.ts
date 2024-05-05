@@ -4,11 +4,15 @@ import './scss/styles.scss';
 import { Product } from './components/buisness/productList';
 import { CatalogUI } from './components/ui/catalogUI';
 import { AllModal } from './components/ui/modalUI';
-
+import { BasketUi } from './components/ui/BasketUI';
+import { Basket } from './components/buisness/basket';
 const api = new Api('https://larek-api.nomoreparties.co/api/weblarek/')
 
 const productList = new ProductList()
 const modal = new AllModal()
+const basket = new Basket()
+
+const basketUi = new BasketUi(modal, basket)
 modal.modalClose()  
 
 const catalog = new CatalogUI()
@@ -17,6 +21,7 @@ const catalog = new CatalogUI()
 // 3. Открытие модалки
 function funcClick(id:string){
     api.get(`product/${id}`).then((product:Product)=>  {
+        basket.selectedProduct = product
         modal.setModal(product)
         modal.modalOpen(modal.cardModal)
     })
@@ -37,8 +42,8 @@ console.log(modal)
 
 
 const basketButton = document.querySelector('.header__basket')
-basketButton.addEventListener('click', ()=> {
-modal.modalOpen(modal.basketModal)
+    basketButton.addEventListener('click', ()=> {
+    modal.modalOpen(modal.basketModal)
 
 })
 

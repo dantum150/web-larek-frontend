@@ -29,20 +29,21 @@ export class CatalogUI extends GeneralUI {
     // 2. 
 
     createCard(product: Product) {  // {id, category,title,price, description}
-        const cardContent = this.cardTemplate.content.cloneNode(true) as HTMLButtonElement
+        const cardContent = this.cardTemplate.content as DocumentFragment
         const cardButton = cardContent.querySelector('.gallery__item')
-        const category = cardContent.querySelector('.card__category')
-        const title = cardContent.querySelector('.card__title')
-        const price = cardContent.querySelector('.card__price')
+        const cardButtonCopy = cardButton.cloneNode(true) as Element
+        const category = cardButtonCopy.querySelector('.card__category')
+        const title = cardButtonCopy.querySelector('.card__title')
+        const price = cardButtonCopy.querySelector('.card__price')
 
 
         category.textContent = product.category
-
+        
         category.classList.add(this.addCategoryClass(product.category))
         title.textContent = product.title
         price.textContent = this.productPrice(product.price)
 
-        return cardButton
+        return cardButtonCopy
     }
 
 
