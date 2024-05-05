@@ -14,7 +14,7 @@ export class Basket  {
             this.basketItems.push(this.selectedProduct)
             return this.selectedProduct
         }
-        return this.selectedProduct
+        return false
     }
 
     removeBasket(productID: string){

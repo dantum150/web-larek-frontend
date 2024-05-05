@@ -18,8 +18,11 @@ export class BasketUi {
 
         this.addProductButton.addEventListener('click', ()=> {
             const product = this.basket.addBasket()
-            const basketItem = this.createBasketItems(product, this.basket.basketItems.length)
-            this.basketList.append(basketItem)
+
+            if(product) {
+                const basketItem = this.createBasketItems(product, this.basket.basketItems.length)
+                this.basketList.append(basketItem)
+            }
         })
     }
 
