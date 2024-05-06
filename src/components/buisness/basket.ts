@@ -22,7 +22,20 @@ export class Basket  {
            return product.id !== productID
         })  
     }
-}
-
     
+    showBasketCounter(){
+      return this.basketItems.length
+    }
 
+    calculateTotalPrice(){
+        let total = 0
+        this.basketItems.forEach((product:Product)=> {
+          total = product.price+total
+        })
+        return total
+    }
+
+}
+// 1. Basket => получить количество товаров в корзине
+// 2. BasketUi => Берём спан и подставляем в него количество товаров в корзине
+    

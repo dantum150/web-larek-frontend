@@ -11,9 +11,13 @@ import { Product } from "../buisness/productList";
 export class BasketUi {
     addProductButton: Element
     basketList: Element
+    basketCounter: Element
+    totalPrice:Element
     constructor(public modal: AllModal, public basket: Basket) {
         this.basketList = this.modal.basketModal.querySelector('.basket__list')
         this.addProductButton = this.modal.cardModal.querySelector('.card__button')
+        this.basketCounter = document.querySelector('.header__basket-counter')
+        this.totalPrice = this.modal.basketModal.querySelector('.basket__price')
 
 
         this.addProductButton.addEventListener('click', ()=> {
@@ -22,6 +26,8 @@ export class BasketUi {
             if(product) {
                 const basketItem = this.createBasketItems(product, this.basket.basketItems.length)
                 this.basketList.append(basketItem)
+                this.changeBasketCounter()
+                this.showCalculateTotalPrice()
             }
         })
     }
@@ -33,7 +39,7 @@ export class BasketUi {
     renderBasketItems(){
         this.basketList.innerHTML = ''
         this.basket.basketItems.forEach((product, index)=>{
-        const basketItem = this.createBasketItems(product,index)
+        const basketItem = this.createBasketItems(product, index + 1)
         this.basketList.append(basketItem) 
      })
     }
@@ -54,10 +60,20 @@ createBasketItems(product:Product, index: number) {
     basketItemDelete.addEventListener('click', ()=> {
         this.basket.removeBasket(product.id)
         this.renderBasketItems()
+        this.changeBasketCounter()
+        this.showCalculateTotalPrice()
     })
 
     return basketItemCopy
 }
+
+    changeBasketCounter(){
+        this.basketCounter.textContent = `${this.basket.showBasketCounter()}`
+}
+
+    showCalculateTotalPrice(){
+        this.totalPrice.textContent = `${this.basket.calculateTotalPrice()} синопсов`
+    }
 
 }
     
