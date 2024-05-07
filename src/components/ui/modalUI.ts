@@ -5,6 +5,7 @@ export class AllModal extends GeneralUI  {
     modals: NodeListOf<Element>
     cardModal: Element
     basketModal: Element
+    orderModal: Element
     
     constructor() {
         super() 
@@ -12,7 +13,7 @@ export class AllModal extends GeneralUI  {
         this.modals = document.querySelectorAll('.modal')
         this.cardModal = (document.querySelector('#card-preview') as HTMLTemplateElement).content.querySelector('.card_full')
         this.basketModal = (document.querySelector('#basket') as HTMLTemplateElement).content.querySelector('.basket')
-        
+        this.orderModal = (document.querySelector('#order') as HTMLTemplateElement).content.querySelector('.form')   
     }
 
     setModal(product:Product) {

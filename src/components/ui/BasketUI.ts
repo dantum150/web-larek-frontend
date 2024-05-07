@@ -13,16 +13,19 @@ export class BasketUi {
     basketList: Element
     basketCounter: Element
     totalPrice:Element
+    orderButton: Element
+
+
     constructor(public modal: AllModal, public basket: Basket) {
         this.basketList = this.modal.basketModal.querySelector('.basket__list')
         this.addProductButton = this.modal.cardModal.querySelector('.card__button')
         this.basketCounter = document.querySelector('.header__basket-counter')
         this.totalPrice = this.modal.basketModal.querySelector('.basket__price')
+        this.orderButton = this.modal.basketModal.querySelector('.basket__button')
 
 
         this.addProductButton.addEventListener('click', ()=> {
             const product = this.basket.addBasket()
-
             if(product) {
                 const basketItem = this.createBasketItems(product, this.basket.basketItems.length)
                 this.basketList.append(basketItem)
@@ -30,7 +33,12 @@ export class BasketUi {
                 this.showCalculateTotalPrice()
             }
         })
+        this.orderButton.addEventListener('click',()=>{
+            this.modal.modalOpen(this.modal.orderModal)
+        })
     }
+
+      
 
     // 1. Кликаем по кнопке "Добавить в корзину":
         // a.Нужный продукт добавлять в массив basketItems
@@ -74,6 +82,8 @@ createBasketItems(product:Product, index: number) {
     showCalculateTotalPrice(){
         this.totalPrice.textContent = `${this.basket.calculateTotalPrice()} синопсов`
     }
+
+
 
 }
     
