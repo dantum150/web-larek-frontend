@@ -6,12 +6,15 @@ import { CatalogUI } from './components/ui/catalogUI';
 import { AllModal } from './components/ui/modalUI';
 import { BasketUi } from './components/ui/BasketUI';
 import { Basket } from './components/buisness/basket';
+import { Order } from './components/buisness/order';
+import { OrderUI } from './components/ui/OrderUI';
 const api = new Api('https://larek-api.nomoreparties.co/api/weblarek/')
 
 const productList = new ProductList()
 const modal = new AllModal()
 const basket = new Basket()
-
+const order = new Order()
+const orderUI = new OrderUI(modal, order)
 const basketUi = new BasketUi(modal, basket)
 modal.modalClose()  
 

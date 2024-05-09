@@ -12,7 +12,10 @@ export class Order {
         this.phone = ''
     }
 
-    setPayment(payment: string) {
-        this.payment = payment
+
+    setParam(key:string, value: string) { // key: payment, address, email, phone
+        //@ts-ignore
+        this[key] = value
     }
+    
 }
