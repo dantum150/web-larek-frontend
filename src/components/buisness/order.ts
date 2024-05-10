@@ -1,5 +1,4 @@
-
-    import { Basket } from "./basket"
+import { Basket } from "./basket"
 
 export class Order {
     payment: string

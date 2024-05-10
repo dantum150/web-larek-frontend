@@ -26,7 +26,6 @@ export class CatalogUI extends GeneralUI {
     }
 
     // 1. кликает по карточке и получает информацию по карточке по которой произошел клик 
-    // 2. 
 
     createCard(product: Product) {  // {id, category,title,price, description}
         const cardContent = this.cardTemplate.content as DocumentFragment

@@ -41,8 +41,14 @@ npm run build
 yarn build
 ```
 
-
 Проектная работа: WEB-ларёк
+
+Реализация Проекта Web-ларёк. 
+Используемый стек: 
+-TypeScript, HTML, SCSS 
+-Для сборки используется Web pack.  
+-Инструменты линтинга и форматирования не подключены
+
 Задачи:
 -спроектировать собственную реализацию MVP-архитектуры веб-приложения;
 -задокументировать спроектированную архитектуру;
@@ -50,86 +56,51 @@ yarn build
 -реализовать на основе базового кода компоненты и модели данных приложения;
 -собрать всё вместе.
 
-Базовый код
+Функциональные требования (требования описывающие принцип работы интернет-магазина)
+Требоавния будут касаться следующего:
+-Главной страницы 
+-Просмотр товаров 
+-Оформление товара
+-Требование ко всем страницам 
 
-1.Класс ProductList 
+1.Базовый код
 
-Класс ProductList представляет собой контейнер для хранения карточек товаров.
-class ProductList:
-    - Создает новый экземпляр ProductList.
-    - @param {Array} products - Начальный набор карточек товаров. По умолчанию пустой массив.
-    constructor(products = []) 
-         - Список карточек товаров.
-         - @type {Array}
-        this.products = products;
-    
-     - Возвращает список всех карточек товаров в списке.
-     - @returns {Array} - Список всех карточек товаров.
+Реализация данного кода осуществляется в папке base включающая таки файлы как:
+1.1 api.ts
+1.2 events.ts
+1.3 localstorage.ts
 
-     getProducts() {
-        return this.products
-    }
-    
-2.Класс ProductItem
+2.Компоненты модели данных (бизнес-логика)
 
-class ProductItem {
-    
-     Создает новый экземпляр ProductItem.
-
-     - @param {string} name - Название товара.
-     - @param {number} price - Цена товара.
-     - @param {string} description - Описание товара.
-     - @param {string} category - Описание категории.
-     - @param {string} urlImage - Ссылка на картинку.
-     
-    constructor(name, price, description, category, urlImage) {
-         - Название товара.
-         - @type {string}
-         
-        this.name = name;
-        
-         - Цена товара.
-         - @type {number}
-        
-        this.price = price;
-        
-        
-         - Описание товара.
-         - @type {string}
-        
-        this.description = description;
-  
-         - Описание товара.
-         - @type {string}
-         
-        this.category = category;
-    }
-
-     - Возвращает название товара.
-     - @returns {string} - Название товара.
-    
-    getProduct() {
-        return {
-            name: this.name,
-            price: this.price,
-            category: this.category
-            ...
-        };
-    }
-}
+Реализация данного кода осуществляется в папке buisness включающая таки файлы как:
+2.1 basket.ts (корзиной)
+2.2 order.ts (заказами)
+2.3 productList.ts (продуктом)
 
 
+Класс Basket (2.1)
+Направлен на работу с корзиной
+Реалзует:
+-Добавление товара в корзину 
+-Удаление товара из корзины 
+-Показ кол-ва товаров
+-Вывод суммы при наполненой корзине товарами на ту или иную стоимость 
 
-3.Класс Order
+Класс Order (2.2)
+Реализует работу в случае с моадльными окнами включающими в себя:
+-оплату 
+-адрес
+-email
+-номер телефона
 
-Класс Order представляет собой заказ, содержащий набор карточек товаров.
+Класс Order представляет собой заказ, содержащий набор карточек товаров
 
 class Order {
     
      - Создает новый экземпляр Order.
      - @param {Array} products - Список карточек товаров, включенных в заказ. По умолчанию пустой массив.
      
-    constructor(payment: string, email: string, phone: string, address string, total: number  items = []) {
+    constructor(payment: string, email: string, phone: string, address: string, total: number  items = []) {
        
          - Список карточек товаров в заказе.
          - @type {Array}
@@ -156,39 +127,84 @@ class Order {
         return total;
     }
 }
-4.Класс Cart
-  Класс Cart представляет собой заказ, содержащий набор карточек товаров.
- 
-class Cart {
-   
-     - Создает новый экземпляр Cart.
-     - @param {Array} products - Список карточек товаров, включенных в заказ. По умолчанию пустой массив.
-     
-    constructor(total: number , items = []) {
-        
-         - Список карточек товаров в заказе.
+
+Класс ProductList (2.3)
+
+Класс ProductList представляет собой контейнер для хранения карточек товаров.
+class ProductList:
+    - Создает новый экземпляр ProductList.
+    - @param {Array} products - Начальный набор карточек товаров. По умолчанию пустой массив.
+    constructor(products = []) 
+         - Список карточек товаров.
          - @type {Array}
-       
-        this.items = items;
-    }
-     - Добавляет карточку товара в заказ.
-     - @param {Object} product - Карточка товара для добавления в заказ.
-     
-    getCartInfo() {
-        return {
-            ... все поля этого класса
-        }
+        this.products = products;
+
+     - Возвращает список всех карточек товаров в списке.
+     - @returns {Array} - Список всех карточек товаров.
+
+     getProducts() {
+        return this.products
     }
 
-     - Рассчитывает общую стоимость заказа.
-     - @returns {number} - Общая стоимость заказа.
-    
-    calculateTotal() {
-        let total = 0;
-        this.products.forEach(product => {
-            total += product.price;
-        });
-        return total;
+
+3.Пользовательский интрефейс (User interface (UI))
+Пользовательский интерфейс релазиуется в папке ui и включает слеюдующие файлы:
+
+-BasketUI.ts
+Ключевой класс BasketUI
+
+ 1.Метод, который на основе массива товаров (basketItems) 
+ будет создавать html => список всех добавленных товаров
+
+2.Метод, берущий кнопку "добавить в корзину" и наделяющий кнопку функций addBasket
+
+3.Метод, берущий кнопку "ведра" и наделяющий кнопку функций removeBasket
+
+Реализуется работа:
+-тега <ul> списка товаров добавленых в корзину ('.basket__list')
+-тега <button> кнопки добавления товара в массив-товаров коризны ('.card__button')
+-тега <span> иконка продуктовой тележки(корзины) ('.header__basket-counter')
+-тега <span>  вывод суммы (указнных в массиве корзины) ('.basket__price')
+-тега <button> кнопка офомрления в корзине ('.basket__button')
+
+
+-catalogUI.ts
+Ключевой класс CatalogUI
+
+Реализуется работа: 
+-тега <main> главного поля показа товаров ('.gallery')
+-тега<template> описывающий модальное окно ('#card-catalog')
+
+-contactsUI.ts
+Ключевой класс ContactsUI
+-включает работу с инпут-полями 
+
+-GeneralUI.ts
+-включает работу с ценой продуктам товара
+
+    productPrice(price:number|null) {
+        return  price ? `${price} синопсов` : 'Бесценно'
     }
-}
+
+
+-modalUI.ts
+Ключевой класс AllModal
+Включает в себя работу модальных окон
+    modals: NodeListOf<Element>
+    cardModal: Element
+    basketModal: Element
+    orderModal: Element
+    contactsModal: Element
+    successModal: Element
+
+    а также реализует:
+    -открытие модальных окон 
+    -закрытие модальных окон
+
+
+-OrderUI.ts
+Ключевой класс OrderUI
+Реализация работы заказа (модального окна включающего взаимодейсвтие выбора способа оплаты и адреса доставки)
+
+
 

@@ -5,7 +5,7 @@ export class Basket  {
     basketItems: Product []
     selectedProduct: Product
     constructor(public storage: LocalStorage) {
-        this.basketItems = []   // {id price title p category}
+    this.basketItems = []   // {id price title p category}
     }
 
     addBasket(){

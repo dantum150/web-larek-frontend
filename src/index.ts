@@ -24,7 +24,7 @@ modal.modalClose()
 const contactsUI  = new ContactsUI(modal, order, onSubmit)
 const catalog = new CatalogUI()
 // 1. Сделать гет-запрос (productId) => product
-// 2. Поместить наш объект в функцию setModal
+// 2. Поместить объект в функцию setModal
 // 3. Открытие модалки
 function funcClick(id:string){
     api.get(`product/${id}`).then((product:Product)=>  {
