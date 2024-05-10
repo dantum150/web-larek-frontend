@@ -8,16 +8,20 @@ import { BasketUi } from './components/ui/BasketUI';
 import { Basket } from './components/buisness/basket';
 import { Order } from './components/buisness/order';
 import { OrderUI } from './components/ui/OrderUI';
+import { ContactsUI } from './components/ui/contactsUI';
+import { LocalStorage } from './components/base/localstorage';
 const api = new Api('https://larek-api.nomoreparties.co/api/weblarek/')
 
 const productList = new ProductList()
 const modal = new AllModal()
-const basket = new Basket()
-const order = new Order()
+const storage = new LocalStorage()
+const basket = new Basket(storage)
+const order = new Order(basket)
 const orderUI = new OrderUI(modal, order)
 const basketUi = new BasketUi(modal, basket)
-modal.modalClose()  
 
+modal.modalClose()  
+const contactsUI  = new ContactsUI(modal, order, onSubmit)
 const catalog = new CatalogUI()
 // 1. Сделать гет-запрос (productId) => product
 // 2. Поместить наш объект в функцию setModal
@@ -28,8 +32,27 @@ function funcClick(id:string){
         modal.setModal(product)
         modal.modalOpen(modal.cardModal)
     })
-
 }
+
+
+
+
+// 1. делает post-запрос
+// 2. if запрос успешен => внутри успешной модалки разместить стоимость (найти тэг со стоимостью)
+
+// 3. успешную модалку нужно будет показать
+//https://larek-api.nomoreparties.co/api/weblarek/order
+function onSubmit() {
+    api.post(`order`, order.returnOrder()).then((order: {id: string, total: number})=> {
+        const orderDiscription = modal.successModal.querySelector('.order-success__description')
+        orderDiscription.textContent =  `Списано ${order.total} синапсов`
+        modal.modalOpen(modal.successModal)
+        basketUi.resetBasket()
+    }).catch()
+    
+}
+
+// post (url, )
 // 1. Получить все карточки с бэкенда
 // 2. В классе ProductList мы сохраняем массив с бэкенда
 // 3. Из класса ProductList мы должны будем передать массив карточек в 

@@ -29,7 +29,7 @@ export class OrderUI {
       })
 
       this.inputAdress.addEventListener('input', (event: any)=> {
-         this.order.setParam('adress',event.target.value)
+         this.order.setParam('address',event.target.value)
       })
 
       this.modal.orderModal.addEventListener('submit', (event)=>{

@@ -77,13 +77,24 @@ createBasketItems(product:Product, index: number) {
 
     changeBasketCounter(){
         this.basketCounter.textContent = `${this.basket.showBasketCounter()}`
-}
-
-    showCalculateTotalPrice(){
-        this.totalPrice.textContent = `${this.basket.calculateTotalPrice()} синопсов`
     }
 
+    showCalculateTotalPrice(){
+        this.totalPrice.textContent = `${this.basket.calculateTotalPrice()} синапсов`
+    }
 
+    resetBasket() {
+        this.basket.cleanBasket()
+        this.renderBasketItems()
+        this.changeBasketCounter()
+        this.showCalculateTotalPrice()
+    }
+
+    
+
+    // 1. cleanBasket product[] => []
+    // 2. renderBasketItems
+    // 3. changeBasketCounter
 
 }
     

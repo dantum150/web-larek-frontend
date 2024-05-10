@@ -192,4 +192,3 @@ class Cart {
     }
 }
 
-5. Catallog

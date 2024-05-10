@@ -1,9 +1,10 @@
 import { Product } from "./productList";
+import { LocalStorage } from "../base/localstorage";
 
 export class Basket  {
     basketItems: Product []
     selectedProduct: Product
-    constructor() {
+    constructor(public storage: LocalStorage) {
         this.basketItems = []   // {id price title p category}
     }
 
@@ -12,15 +13,19 @@ export class Basket  {
 
         if(!foundBasketItem) {
             this.basketItems.push(this.selectedProduct)
+            this.storage.set('products', this.basketItems)
             return this.selectedProduct
         }
         return false
     }
 
-    removeBasket(productID: string){
+    removeBasket(productID: string, ){
         this.basketItems = this.basketItems.filter((product) => {
+            
            return product.id !== productID
+           
         })  
+        this.storage.set('products', this.basketItems)
     }
     
     showBasketCounter(){
@@ -35,6 +40,10 @@ export class Basket  {
         return total
     }
 
+
+    cleanBasket() {
+        this.basketItems = []
+    }
 }
 // 1. Basket => получить количество товаров в корзине
 // 2. BasketUi => Берём спан и подставляем в него количество товаров в корзине

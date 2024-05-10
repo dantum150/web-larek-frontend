@@ -7,6 +7,7 @@ export class AllModal extends GeneralUI  {
     basketModal: Element
     orderModal: Element
     contactsModal: Element
+    successModal: Element
     
     constructor() {
         super() 
@@ -16,7 +17,8 @@ export class AllModal extends GeneralUI  {
         this.basketModal = (document.querySelector('#basket') as HTMLTemplateElement).content.querySelector('.basket')
         this.orderModal = (document.querySelector('#order') as HTMLTemplateElement).content.querySelector('.form')   
         this.contactsModal = (document.querySelector('#contacts') as HTMLTemplateElement).content.querySelector('.form')   
-        
+        this.successModal = (document.querySelector ('#success') as HTMLTemplateElement).content.querySelector('.order-success')
+         
     }
 
     setModal(product:Product) {
