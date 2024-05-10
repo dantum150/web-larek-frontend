@@ -77,7 +77,6 @@ yarn build
 2.2 order.ts (заказами)
 2.3 productList.ts (продуктом)
 
-
 Класс Basket (2.1)
 Направлен на работу с корзиной
 Реалзует:
@@ -146,7 +145,6 @@ class ProductList:
         return this.products
     }
 
-
 3.Пользовательский интрефейс (User interface (UI))
 Пользовательский интерфейс релазиуется в папке ui и включает слеюдующие файлы:
 
@@ -167,7 +165,6 @@ class ProductList:
 -тега <span>  вывод суммы (указнных в массиве корзины) ('.basket__price')
 -тега <button> кнопка офомрления в корзине ('.basket__button')
 
-
 -catalogUI.ts
 Ключевой класс CatalogUI
 
@@ -186,7 +183,6 @@ class ProductList:
         return  price ? `${price} синопсов` : 'Бесценно'
     }
 
-
 -modalUI.ts
 Ключевой класс AllModal
 Включает в себя работу модальных окон
@@ -200,7 +196,6 @@ class ProductList:
     а также реализует:
     -открытие модальных окон 
     -закрытие модальных окон
-
 
 -OrderUI.ts
 Ключевой класс OrderUI
