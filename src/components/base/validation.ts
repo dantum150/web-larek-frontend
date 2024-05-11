@@ -6,12 +6,12 @@ export class Validation {
     }
 
     toggleButtonState(inputList: HTMLInputElement[], buttonElement: HTMLButtonElement){
-if(this.hasInvalidInput(inputList)) {
-    buttonElement.disabled = true; 
-}
-else{
-    buttonElement.disabled = false;
-}
+        if(this.hasInvalidInput(inputList)) {
+            buttonElement.disabled = true; 
+        }
+        else{
+            buttonElement.disabled = false;
+        }
     }
 
     setEvenListener(formElement:HTMLFormElement) {
