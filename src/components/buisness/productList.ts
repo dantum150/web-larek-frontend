@@ -17,6 +17,6 @@ export class ProductList {
     }
 
     getProducts() {
-        return this.products
+        return this.products 
     }
 }

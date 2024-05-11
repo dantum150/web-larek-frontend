@@ -10,6 +10,7 @@ import { Order } from './components/buisness/order';
 import { OrderUI } from './components/ui/OrderUI';
 import { ContactsUI } from './components/ui/contactsUI';
 import { LocalStorage } from './components/base/localstorage';
+import { Validation } from './components/base/validation';
 const api = new Api('https://larek-api.nomoreparties.co/api/weblarek/')
 
 const productList = new ProductList()
@@ -19,7 +20,10 @@ const basket = new Basket(storage)
 const order = new Order(basket)
 const orderUI = new OrderUI(modal, order)
 const basketUi = new BasketUi(modal, basket)
+const validation = new Validation()
 
+validation.initValidation()
+basketUi.initBasket()
 modal.modalClose()  
 const contactsUI  = new ContactsUI(modal, order, onSubmit)
 const catalog = new CatalogUI()

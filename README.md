@@ -13,7 +13,7 @@ https://github.com/dantum150/web-larek-frontend.git
 - src/pages/index.html — HTML-файл главной страницы
 - src/types/index.ts — файл с типами
 - src/index.ts — точка входа приложения
-- src/styles/styles.scss — корневой файл стилей
+- src/scss/styles.scss — корневой файл стилей
 - src/utils/constants.ts — файл с константами
 - src/utils/utils.ts — файл с утилитами
 
@@ -42,6 +42,12 @@ npm run build
 ```
 yarn build
 ```
+
+Из каких основных частей состоит архитектура проекта? Это могут быть данные, отображения, экраны и так далее.
+
+
+
+
 
 Проектная работа: WEB-ларёк
 

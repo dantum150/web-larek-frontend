@@ -42,15 +42,10 @@ export class AllModal extends GeneralUI  {
     }
     
     modalClose() {  
-        this.modals.forEach((modal, index, array) => {
-            const button = modal.querySelector('.modal__close')
-
-            if(button) {
-                button.addEventListener('click', () => {
-                    modal.classList.remove('modal_active')
-                })
-            }
-        })
+        const button = this.modal.querySelector('.modal__close')
+        button.addEventListener('click', () => {
+            this.modal.classList.remove('modal_active')
+          })
     }
 }
 

@@ -13,7 +13,7 @@ export class BasketUi {
     basketList: Element
     basketCounter: Element
     totalPrice:Element
-    orderButton: Element
+    orderButton: HTMLButtonElement
 
 
     constructor(public modal: AllModal, public basket: Basket) {
@@ -22,15 +22,14 @@ export class BasketUi {
         this.basketCounter = document.querySelector('.header__basket-counter')
         this.totalPrice = this.modal.basketModal.querySelector('.basket__price')
         this.orderButton = this.modal.basketModal.querySelector('.basket__button')
-
+        console.log(this.orderButton)
 
         this.addProductButton.addEventListener('click', ()=> {
             const product = this.basket.addBasket()
             if(product) {
                 const basketItem = this.createBasketItems(product, this.basket.basketItems.length)
                 this.basketList.append(basketItem)
-                this.changeBasketCounter()
-                this.showCalculateTotalPrice()
+                this.initBasket()
             }
         })
         this.orderButton.addEventListener('click',()=>{
@@ -44,13 +43,13 @@ export class BasketUi {
         // a.Нужный продукт добавлять в массив basketItems
         // b.Аппендить добавленный в массив продукт в ul
 
-    renderBasketItems(){
+renderBasketItems(){
         this.basketList.innerHTML = ''
         this.basket.basketItems.forEach((product, index)=>{
         const basketItem = this.createBasketItems(product, index + 1)
         this.basketList.append(basketItem) 
      })
-    }
+}
 
 createBasketItems(product:Product, index: number) {
     const contentBasketItems = (document.querySelector('#card-basket') as HTMLTemplateElement).content as DocumentFragment
@@ -67,9 +66,7 @@ createBasketItems(product:Product, index: number) {
     basketCardPrice.textContent = `${product.price || 0} синопсов`  
     basketItemDelete.addEventListener('click', ()=> {
         this.basket.removeBasket(product.id)
-        this.renderBasketItems()
-        this.changeBasketCounter()
-        this.showCalculateTotalPrice()
+        this.initBasket()
     })
 
     return basketItemCopy
@@ -85,16 +82,27 @@ createBasketItems(product:Product, index: number) {
 
     resetBasket() {
         this.basket.cleanBasket()
+        this.initBasket()
+    }
+    
+    toggleDisableButton(){
+        if(this.basket.basketItems.length === 0){
+            this.orderButton.disabled = true
+        }
+        else{
+            this.orderButton.disabled = false
+        }
+    }
+
+    initBasket() {
         this.renderBasketItems()
         this.changeBasketCounter()
+        this.toggleDisableButton()
         this.showCalculateTotalPrice()
     }
 
-    
-
-    // 1. cleanBasket product[] => []
-    // 2. renderBasketItems
-    // 3. changeBasketCounter
+    // 1. basketItems.length > 0   => кнопка активна, без аттрибута disable
+    // 2. basketItems.length === 0  => кнопка неактивна, с аттрибутом disable
 
 }
     
