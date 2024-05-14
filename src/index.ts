@@ -84,3 +84,4 @@ api.get('product/412bcf81-7e75-4e70-bdb9-d3c73c9803b7').then((product: Product) 
 //     console.log(res.json())
     
 // })
+

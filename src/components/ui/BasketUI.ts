@@ -7,16 +7,18 @@
 import { AllModal } from "./modalUI";
 import { Basket } from "../buisness/basket";
 import { Product } from "../buisness/productList";
+import { Render } from "./render";
 
-export class BasketUi {
+export class BasketUi extends Render {
     addProductButton: Element
-    basketList: Element
+    basketList: HTMLElement
     basketCounter: Element
     totalPrice:Element
     orderButton: HTMLButtonElement
 
 
     constructor(public modal: AllModal, public basket: Basket) {
+        super()
         this.basketList = this.modal.basketModal.querySelector('.basket__list')
         this.addProductButton = this.modal.cardModal.querySelector('.card__button')
         this.basketCounter = document.querySelector('.header__basket-counter')
@@ -45,10 +47,8 @@ export class BasketUi {
 
 renderBasketItems(){
         this.basketList.innerHTML = ''
-        this.basket.basketItems.forEach((product, index)=>{
-        const basketItem = this.createBasketItems(product, index + 1)
-        this.basketList.append(basketItem) 
-     })
+        this.renderList(this.basket.basketItems,(arrayItem, index: number) => this.createBasketItems(arrayItem, index),this.basketList )
+
 }
 
 createBasketItems(product:Product, index: number) {
@@ -105,4 +105,3 @@ createBasketItems(product:Product, index: number) {
     // 2. basketItems.length === 0  => кнопка неактивна, с аттрибутом disable
 
 }
-    

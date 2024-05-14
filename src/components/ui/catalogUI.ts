@@ -1,7 +1,9 @@
 import { Product } from "../buisness/productList"
 import { AllModal } from "./modalUI"
 import { GeneralUI } from "./GeneralUI"
-export class CatalogUI extends GeneralUI {
+import { Render } from "./render"
+
+export class CatalogUI extends Render {
     main: HTMLElement
     cardTemplate: HTMLTemplateElement
 
@@ -12,6 +14,14 @@ export class CatalogUI extends GeneralUI {
     }
 
     renderCatalog(products: Product[], funcClick: (productId: string) => void) {
+        this.renderList(
+            products,
+            (arrayItem) => this.createCard(arrayItem),
+            this.main,
+            {event: 'click', callback: () =>funcClick, args: []}
+        ) 
+
+       
         products.forEach((product) => {
             const card = this.createCard(product)
             card.addEventListener('click', () => {
@@ -30,7 +40,7 @@ export class CatalogUI extends GeneralUI {
     createCard(product: Product) {  // {id, category,title,price, description}
         const cardContent = this.cardTemplate.content as DocumentFragment
         const cardButton = cardContent.querySelector('.gallery__item')
-        const cardButtonCopy = cardButton.cloneNode(true) as Element
+        const cardButtonCopy = cardButton.cloneNode(true) as HTMLElement
         const category = cardButtonCopy.querySelector('.card__category')
         const title = cardButtonCopy.querySelector('.card__title')
         const price = cardButtonCopy.querySelector('.card__price')
@@ -40,7 +50,7 @@ export class CatalogUI extends GeneralUI {
         
         category.classList.add(this.addCategoryClass(product.category))
         title.textContent = product.title
-        price.textContent = this.productPrice(product.price)
+        // price.textContent = this.productPrice(product.price)
 
         return cardButtonCopy
     }
