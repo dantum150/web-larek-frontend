@@ -5,12 +5,13 @@ export class Render {
         array: ArrayItem [], 
         element: (arrayItem: ArrayItem, index?: number) => HTMLElement ,
         container: HTMLElement,
-        eventListener?: {event: string, callback: () => void, args: any[]}
+        eventListener?: (tag: HTMLElement, arrayItem: ArrayItem) => void
     ) {
         array.forEach((arrayItem,index)=> {
             const HtmlElement = element(arrayItem, index + 1)
+            
             if(eventListener) {
-                HtmlElement.addEventListener(eventListener.event, eventListener.callback)
+                eventListener(HtmlElement, arrayItem)
             }
             container.append(HtmlElement)
         })

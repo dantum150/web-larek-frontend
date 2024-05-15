@@ -12,28 +12,22 @@ export class CatalogUI extends Render {
         this.main = document.querySelector('.gallery')
         this.cardTemplate = document.querySelector('#card-catalog')
     }
-
+    
     renderCatalog(products: Product[], funcClick: (productId: string) => void) {
-        this.renderList(
+        this.renderList<Product>(
             products,
             (arrayItem) => this.createCard(arrayItem),
             this.main,
-            {event: 'click', callback: () =>funcClick, args: []}
+            (card: HTMLButtonElement, product: Product) => this.addCardClick(card, product, funcClick )
         ) 
+    }
 
-       
-        products.forEach((product) => {
-            const card = this.createCard(product)
-            card.addEventListener('click', () => {
-                // 1. Сделать гет-запрос (productId) => product
-                // 2. Поместить наш объект в функцию setModal
-                // 3. Открытие модалки
-                // this.modal.modalOpen(this.modal.cardModal)
-                funcClick(product.id)      // api.get(`product/${productId}`)  => product  => setModal(product) => openModal(modal.cardModal)
-            })
-            this.main.append(card)
+    addCardClick(card: HTMLButtonElement, product: Product, callback: (id: string) => void) {
+        card.addEventListener('click', () => {
+            callback(product.id)
         })
     }
+
 
     // 1. кликает по карточке и получает информацию по карточке по которой произошел клик 
 
