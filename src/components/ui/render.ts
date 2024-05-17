@@ -16,4 +16,12 @@ export class Render {
             container.append(HtmlElement)
         })
     }
+
+    productPrice(price:number|null) {
+        return  price ? `${price} синопсов` : 'Бесценно'
+    }
+
 }
+
+
+

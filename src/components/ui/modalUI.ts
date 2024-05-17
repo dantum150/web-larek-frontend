@@ -1,6 +1,6 @@
 import { Product } from "../buisness/productList"
-import { GeneralUI } from "./GeneralUI"
-export class AllModal extends GeneralUI  {
+import { Render } from "./render"
+export class AllModal extends Render {
     modal: Element
     modals: NodeListOf<Element>
     cardModal: Element

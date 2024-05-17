@@ -19,17 +19,25 @@ export class Validation {
         const buttonElement = formElement.querySelector('.button') as HTMLButtonElement
 
         inputList.forEach((inputElement)=> {
-            inputElement.addEventListener('input',()=> {
+            inputElement.addEventListener('input',()=> {    // ввод в тэг инпута
                 this.toggleButtonState(inputList, buttonElement)
             } )
         })
     }
 
     initValidation() {
-        const forms = document.querySelectorAll('.form') as NodeListOf<HTMLFormElement>
+        const templates = document.querySelectorAll('template')
+        templates.forEach((template)=> {
+            const form = template.content.querySelector('.form') as HTMLFormElement
 
-        forms.forEach((form) => {
-            this.setEvenListener(form)
-        })
+            if(form) {
+                this.setEvenListener(form)
+            }
+        }) 
+        // const forms = document.querySelectorAll('.form') as NodeListOf<HTMLFormElement>
+
+        // forms.forEach((form) => {
+        //     this.setEvenListener(form)
+        // })
     }
 }
