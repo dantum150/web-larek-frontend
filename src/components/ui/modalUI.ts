@@ -28,6 +28,11 @@ export class AllModal extends Render {
         const priceModal = this.cardModal.querySelector('.card__price')
 
         categoryModal.textContent = product.category
+
+        
+        categoryModal.classList.add(this.getCategoryClass(product.category))
+
+        
         titleModal.textContent = product.title
         textModal.textContent = product.description
         priceModal.textContent = this.productPrice(product.price)
@@ -42,12 +47,26 @@ export class AllModal extends Render {
     }
     
     modalClose() {  
-        const button = this.modal.querySelector('.modal__close')
-        button.addEventListener('click', () => {
-            this.modal.classList.remove('modal_active')
-          })
+        // const button = this.modal.querySelector('.modal__close')
+        // button.addEventListener('click', () => {
+        //     this.modal.classList.remove('modal_active')
+        //   })
+ 
+        // 1. если у кликнутого тега будет modal, 
+        this.modal.addEventListener('click', (event: any)=> {
+            // this.modal.classList.remove('modal_active')
+
+
+            // tag => .modal && .modal__close
+    
+            if(event.target.classList.contains('modal') || event.target.classList.contains('modal__close')) {
+               this.modal.classList.remove('modal_active') 
+            }
+        })
     }
 }
+
+
 
     
 

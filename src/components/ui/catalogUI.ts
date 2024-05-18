@@ -41,32 +41,10 @@ export class CatalogUI extends Render {
 
         category.textContent = product.category
         
-        category.classList.add(this.addCategoryClass(product.category))
+        category.classList.add(this.getCategoryClass(product.category))
         title.textContent = product.title
         price.textContent = this.productPrice(product.price)
 
         return cardButtonCopy
-    }
-
-
-    addCategoryClass(category: string) {
-        if(category === 'другое'){
-            return 'card__category_other'
-        } else if(category === 'софт-скил') {
-            return 'card__category_soft'
-        }
-        else if(category === 'хард-скил') {
-            return 'card__category_hard'
-        }
-        else if(category === 'кнопка') {
-            return 'card__category_button'
-        }
-        else if(category === 'дополнительное') {
-            return 'card__category_additinal'
-        }
-        else {
-            return ' '
-        }
-        
     }
 }

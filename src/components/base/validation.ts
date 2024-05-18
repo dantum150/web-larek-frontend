@@ -16,7 +16,7 @@ export class Validation {
 
     setEvenListener(formElement:HTMLFormElement) {
         const inputList = Array.from(formElement.querySelectorAll('.form__input')) as HTMLInputElement[]
-        const buttonElement = formElement.querySelector('.button') as HTMLButtonElement
+        const buttonElement = formElement.querySelector('.button[type=submit]') as HTMLButtonElement
 
         inputList.forEach((inputElement)=> {
             inputElement.addEventListener('input',()=> {    // ввод в тэг инпута
