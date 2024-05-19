@@ -2,6 +2,7 @@ import { Product } from "../buisness/productList"
 import { Render } from "./render"
 export class AllModal extends Render {
     modal: Element
+    modalContent: HTMLElement
     modals: NodeListOf<Element>
     cardModal: Element
     basketModal: Element
@@ -18,7 +19,7 @@ export class AllModal extends Render {
         this.orderModal = (document.querySelector('#order') as HTMLTemplateElement).content.querySelector('.form')   
         this.contactsModal = (document.querySelector('#contacts') as HTMLTemplateElement).content.querySelector('.form')   
         this.successModal = (document.querySelector ('#success') as HTMLTemplateElement).content.querySelector('.order-success')
-         
+        this.modalContent = this.modal.querySelector('.modal__content')
     }
 
     setModal(product:Product) {
@@ -40,9 +41,8 @@ export class AllModal extends Render {
 
    
     modalOpen(modal: Element){
-        const modalContent = this.modal.querySelector('.modal__content')
-        modalContent.innerHTML = ''
-        modalContent.append(modal)
+        this.modalContent.innerHTML = ''
+        this.modalContent.append(modal)
         this.modal.classList.add('modal_active')
     }
     

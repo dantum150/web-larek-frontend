@@ -37,10 +37,15 @@ export class CatalogUI extends Render {
         const category = cardButtonCopy.querySelector('.card__category')
         const title = cardButtonCopy.querySelector('.card__title')
         const price = cardButtonCopy.querySelector('.card__price')
+        const image = cardButtonCopy.querySelector('.card__image') as HTMLImageElement
 
+        // 1. Создание строки
+        // 2. Внутрь строчки вставить javascript
+        // 3.  `   ${}`
 
         category.textContent = product.category
-        
+        image.src = `../images/cards/${product.image}`
+
         category.classList.add(this.getCategoryClass(product.category))
         title.textContent = product.title
         price.textContent = this.productPrice(product.price)

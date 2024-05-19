@@ -20,7 +20,7 @@ const basket = new Basket(storage)
 const order = new Order(basket)
 const orderUI = new OrderUI(modal, order)
 const basketUi = new BasketUi(modal, basket)
-const validation = new Validation()
+const validation = new Validation(order)
 
 validation.initValidation()
 basketUi.initBasket()
