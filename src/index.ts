@@ -3,7 +3,7 @@ import { ProductList } from './components/buisness/productList';
 import './scss/styles.scss';
 import { Product } from './components/buisness/productList';
 import { CatalogUI } from './components/ui/catalogUI';
-import { AllModal } from './components/ui/modalUI';
+import { AllModals } from './components/ui/modalUI';
 import { BasketUi } from './components/ui/BasketUI';
 import { Basket } from './components/buisness/basket';
 import { Order } from './components/buisness/order';
@@ -14,7 +14,7 @@ import { Validation } from './components/base/validation';
 const api = new Api('https://larek-api.nomoreparties.co/api/weblarek/')
 
 const productList = new ProductList()
-const modal = new AllModal()
+const modal = new AllModals()
 const storage = new LocalStorage()
 const basket = new Basket(storage)
 const order = new Order(basket)
@@ -24,7 +24,7 @@ const validation = new Validation(order)
 
 validation.initValidation()
 basketUi.initBasket()
-modal.modalClose()  
+modal.setCloseListeners()  
 const contactsUI  = new ContactsUI(modal, order, onSubmit)
 const catalog = new CatalogUI()
 // 1. Сделать гет-запрос (productId) => product
@@ -34,7 +34,7 @@ function funcClick(id:string){
     api.get(`product/${id}`).then((product:Product)=>  {
         basket.selectedProduct = product
         modal.setModal(product)
-        modal.modalOpen(modal.cardModal)
+        modal.openModal(modal.cardModal)
     })
 }
 
@@ -48,11 +48,10 @@ function funcClick(id:string){
 //https://larek-api.nomoreparties.co/api/weblarek/order
 function onSubmit() {
     api.post(`order`, order.returnOrder()).then((order: {id: string, total: number})=> {
-        const orderDiscription = modal.successModal.querySelector('.order-success__description')
-        orderDiscription.textContent =  `Списано ${order.total} синапсов`
-        modal.modalOpen(modal.successModal)
+        orderUI.successDiscription.textContent =  `Списано ${order.total} синапсов`
+        modal.openModal(modal.successModal)
         basketUi.resetBasket()
-    }).catch()
+    }).catch((console.error))
     
 }
 
@@ -73,15 +72,11 @@ console.log(modal)
 
 const basketButton = document.querySelector('.header__basket')
     basketButton.addEventListener('click', ()=> {
-    modal.modalOpen(modal.basketModal)
+    modal.openModal(modal.basketModal)
 
 })
 
 api.get('product/412bcf81-7e75-4e70-bdb9-d3c73c9803b7').then((product: Product) => {
     console.log(product)
 })
-// fetch('https://larek-api.nomoreparties.co/api/weblarek/product/412bcf81-7e75-4e70-bdb9-d3c73c9803b7').then((res)=>{
-//     console.log(res.json())
-    
-// })
 

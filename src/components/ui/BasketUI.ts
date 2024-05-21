@@ -4,7 +4,7 @@
 // 2. Метод, берущий кнопку "добавить в корзину" и наделяющий кнопку функций addBasket
 
 // 3. Метод, берущий кнопку "ведра" и наделяющий кнопку функций removeBasket
-import { AllModal } from "./modalUI";
+import { AllModals } from "./modalUI";
 import { Basket } from "../buisness/basket";
 import { Product } from "../buisness/productList";
 import { Render } from "./render";
@@ -17,7 +17,7 @@ export class BasketUi extends Render {
     orderButton: HTMLButtonElement
 
 
-    constructor(public modal: AllModal, public basket: Basket) {
+    constructor(public modal: AllModals, public basket: Basket) {
         super()
         this.basketList = this.modal.basketModal.querySelector('.basket__list')
         this.addProductButton = this.modal.cardModal.querySelector('.card__button')
@@ -35,7 +35,7 @@ export class BasketUi extends Render {
             }
         })
         this.orderButton.addEventListener('click',()=>{
-            this.modal.modalOpen(this.modal.orderModal)
+            this.modal.openModal(this.modal.orderModal)
         })
     }
 

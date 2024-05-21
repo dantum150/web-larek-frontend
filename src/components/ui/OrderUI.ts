@@ -1,40 +1,48 @@
 import { Order } from "../buisness/order";
-import { AllModal } from "./modalUI";
+import { AllModals } from "./modalUI";
 
 
 export class OrderUI {
    orderButtons: NodeListOf<HTMLButtonElement>
    inputAdress: Element
+   successDiscription: Element
 
    payments = {
       'card': 'online',
       'cash': 'received'
    }
-   constructor(public modal: AllModal, public order: Order){
+   constructor(public modal: AllModals, public order: Order){
       this.orderButtons = this.modal.orderModal.querySelectorAll('.button_alt')
       this.inputAdress = this.modal.orderModal.querySelector('.form__input')
+      this.successDiscription = this.modal.successModal.querySelector('.order-success__description')
       
       this.orderButtons.forEach((button) => {
-         button.addEventListener('click', (event: any) => {
+         button.addEventListener('click', (event: Event) => {
 
-            const name = event.target.name  // 'card' || 'cash' || 'more'
+            const target = event.target as HTMLButtonElement
+
+            const name = target.name  // 'card' || 'cash' || 'more'
             //@ts-ignore
 
             let payment = this.payments[name] 
 
             this.order.setParam('payment', payment )
 
-            this.selectButton(event.target)
+            this.selectButton(target)
          })
       })
 
-      this.inputAdress.addEventListener('input', (event: any)=> {
-         this.order.setParam('address',event.target.value)
+      this.inputAdress.addEventListener('input', (event: Event)=> {
+         const target = event.target as HTMLInputElement
+
+         this.order.setParam('address',target.value)
       })
+
+      
 
       this.modal.orderModal.addEventListener('submit', (event)=>{
          event.preventDefault()
-         this.modal.modalOpen(this.modal.contactsModal)
+         this.modal.openModal(this.modal.contactsModal)
       })
    }
 

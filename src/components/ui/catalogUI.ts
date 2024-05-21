@@ -1,5 +1,5 @@
 import { Product } from "../buisness/productList"
-import { AllModal } from "./modalUI"
+import { AllModals } from "./modalUI"
 import { Render } from "./render"
 
 export class CatalogUI extends Render {
@@ -45,10 +45,11 @@ export class CatalogUI extends Render {
 
         category.textContent = product.category
         image.src = `../images/cards/${product.image}`
+        image.alt = `${product.title}`
 
         category.classList.add(this.getCategoryClass(product.category))
         title.textContent = product.title
-        price.textContent = this.productPrice(product.price)
+        price.textContent = this.setProductPrice(product.price)
 
         return cardButtonCopy
     }
