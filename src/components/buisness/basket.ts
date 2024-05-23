@@ -1,4 +1,4 @@
-import { Product } from "./productList";
+import { Product } from "../../types"
 import { LocalStorage } from "../base/localstorage";
 
 export class Basket  {
@@ -45,6 +45,3 @@ export class Basket  {
         this.basketItems = []
     }
 }
-// 1. Basket => получить количество товаров в корзине
-// 2. BasketUi => Берём спан и подставляем в него количество товаров в корзине
-    

@@ -37,6 +37,12 @@ export class Render {
         return this.categoriesClasses[category] || ''
     }
 
+    setSrcImage(image:HTMLImageElement, url:string) {
+        import(`/src/images/cards${url}`).then(imagePath => {
+            image.setAttribute('src', imagePath.default);
+        }) 
+    
+    }
 }
 
 

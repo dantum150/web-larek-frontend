@@ -6,7 +6,7 @@
 // 3. Метод, берущий кнопку "ведра" и наделяющий кнопку функций removeBasket
 import { AllModals } from "./modalUI";
 import { Basket } from "../buisness/basket";
-import { Product } from "../buisness/productList";
+import { Product } from "../../types"
 import { Render } from "./render";
 
 export class BasketUi extends Render {
@@ -15,6 +15,7 @@ export class BasketUi extends Render {
     basketCounter: Element
     totalPrice:Element
     orderButton: HTMLButtonElement
+    basketButton: HTMLButtonElement
 
 
     constructor(public modal: AllModals, public basket: Basket) {
@@ -25,6 +26,11 @@ export class BasketUi extends Render {
         this.totalPrice = this.modal.basketModal.querySelector('.basket__price')
         this.orderButton = this.modal.basketModal.querySelector('.basket__button')
         console.log(this.orderButton)
+        this.basketButton = document.querySelector('.header__basket')
+
+        this.basketButton.addEventListener('click', ()=> {
+            modal.openModal(modal.basketModal)
+        })
 
         this.addProductButton.addEventListener('click', ()=> {
             const product = this.basket.addBasket()
@@ -38,12 +44,6 @@ export class BasketUi extends Render {
             this.modal.openModal(this.modal.orderModal)
         })
     }
-
-      
-
-    // 1. Кликаем по кнопке "Добавить в корзину":
-        // a.Нужный продукт добавлять в массив basketItems
-        // b.Аппендить добавленный в массив продукт в ul
 
 renderBasketItems(){
         this.basketList.innerHTML = ''
@@ -100,8 +100,4 @@ createBasketItems(product:Product, index: number) {
         this.toggleDisableButton()
         this.showCalculateTotalPrice()
     }
-
-    // 1. basketItems.length > 0   => кнопка активна, без аттрибута disable
-    // 2. basketItems.length === 0  => кнопка неактивна, с аттрибутом disable
-
 }

@@ -1,6 +1,4 @@
 
-
-
 export class LocalStorage {
     get(key: string) {      // 'products'      => [{id,title, price,descriptiom}]
         const json = localStorage.getItem(key)

@@ -1,12 +1,4 @@
-export interface Product {
-  id: string
-  description: string
-  image: string
-  title: string
-  category:string
-  price: number
-}
-
+import { Product } from "../../types"
 
 export class ProductList {
     products: Product[] = []

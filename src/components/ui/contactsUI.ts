@@ -16,21 +16,10 @@ export class ContactsUI {
                 this.order.setParam(target.name, target.value)
             })
         })
-            
-        // 1. Получить тэг формы (модалки = form)
-        // 2. На полученную форму надо обработчик события submit
-        // 3. Submit => console.log(returnOrder)
 
-            this.modal.contactsModal.addEventListener('submit', (event)=> {
+        this.modal.contactsModal.addEventListener('submit', (event)=> {
                 event.preventDefault()
-                
                 onSubmit()
-            })
-        
+        })
     }       
-
-        
-
-
-
 }

@@ -1,4 +1,4 @@
-import { Product } from "../buisness/productList"
+import { Product } from "../../types"
 import { AllModals } from "./modalUI"
 import { Render } from "./render"
 
@@ -28,8 +28,6 @@ export class CatalogUI extends Render {
     }
 
 
-    // 1. кликает по карточке и получает информацию по карточке по которой произошел клик 
-
     createCard(product: Product) {  // {id, category,title,price, description}
         const cardContent = this.cardTemplate.content as DocumentFragment
         const cardButton = cardContent.querySelector('.gallery__item')
@@ -39,12 +37,8 @@ export class CatalogUI extends Render {
         const price = cardButtonCopy.querySelector('.card__price')
         const image = cardButtonCopy.querySelector('.card__image') as HTMLImageElement
 
-        // 1. Создание строки
-        // 2. Внутрь строчки вставить javascript
-        // 3.  `   ${}`
-
         category.textContent = product.category
-        image.src = `../images/cards/${product.image}`
+        this.setSrcImage(image, product.image )
         image.alt = `${product.title}`
 
         category.classList.add(this.getCategoryClass(product.category))

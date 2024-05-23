@@ -1,4 +1,4 @@
-import { Product } from "../buisness/productList"
+import { Product } from "../../types"
 import { Render } from "./render"
 export class AllModals extends Render {
     modal: Element
@@ -9,6 +9,14 @@ export class AllModals extends Render {
     orderModal: Element
     contactsModal: Element
     successModal: Element
+
+     categoryModal:Element
+     titleModal:Element
+     textModal:Element
+     priceModal:Element
+     buttonModal: HTMLButtonElement
+     image:HTMLImageElement
+
     
     constructor() {
         super() 
@@ -20,29 +28,32 @@ export class AllModals extends Render {
         this.contactsModal = (document.querySelector('#contacts') as HTMLTemplateElement).content.querySelector('.form')   
         this.successModal = (document.querySelector ('#success') as HTMLTemplateElement).content.querySelector('.order-success')
         this.modalContent = this.modal.querySelector('.modal__content')
+
+        this.categoryModal = this.cardModal.querySelector('.card__category')
+        this.titleModal = this.cardModal.querySelector('.card__title')
+        this.textModal = this.cardModal.querySelector('.card__text')
+        this.priceModal = this.cardModal.querySelector('.card__price')
+        this.buttonModal = this.cardModal.querySelector('.card__button') as HTMLButtonElement
+        this.image = this.cardModal.querySelector('.card__image') as HTMLImageElement
+
     }
 
     setModal(product:Product) {
-        const categoryModal = this.cardModal.querySelector('.card__category')
-        const titleModal = this.cardModal.querySelector('.card__title')
-        const textModal = this.cardModal.querySelector('.card__text')
-        const priceModal = this.cardModal.querySelector('.card__price')
-        const buttonModal = this.cardModal.querySelector('.card__button') as HTMLButtonElement
+     
+        this.categoryModal.textContent = product.category
 
-        categoryModal.textContent = product.category
+        this.categoryModal.classList.add(this.getCategoryClass(product.category))
 
-        categoryModal.classList.add(this.getCategoryClass(product.category))
+        this.titleModal.textContent = product.title
+        this.textModal.textContent = product.description
+        this.priceModal.textContent = this.setProductPrice(product.price)
 
-        titleModal.textContent = product.title
-        textModal.textContent = product.description
-        priceModal.textContent = this.setProductPrice(product.price)
+        this.buttonModal.disabled = !(!!product.price)
 
-        buttonModal.disabled = !(!!product.price)
+        this.setSrcImage(this.image, product.image)
         
-
     }
 
-   
     openModal(modal: Element){
         this.modalContent.innerHTML = ''
         this.modalContent.append(modal)
@@ -58,20 +69,11 @@ export class AllModals extends Render {
             if(target.classList.contains('modal') || target.classList.contains('modal__close')) {
                this.modal.classList.remove('modal_active') 
             }
+
+            this.successModal.addEventListener('click', ()=> {
+                this.modal.classList.remove('modal_active') 
+            })
         })
     }
 }
 
-
-
-    
-
-
-
-
-
-
-// 1. Получить массив кнопок
-// 2. Циклом пробежаться по массиву
-// 3. Каждой кнопке обработчик события (клик)
-// 4. У модалки удалять класс modal_active
