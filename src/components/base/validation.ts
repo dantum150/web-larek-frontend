@@ -10,8 +10,6 @@ export class Validation {
         })
     }
 
-    
-
     toggleButtonState(inputList: HTMLInputElement[], buttonElement: HTMLButtonElement){
         if(this.hasInvalidInput(inputList) || !this.order.payment) {  
             buttonElement.disabled = true; 
@@ -50,11 +48,7 @@ export class Validation {
                 this.setEvenListener(form)
             }
         }) 
-        // const forms = document.querySelectorAll('.form') as NodeListOf<HTMLFormElement>
-
-        // forms.forEach((form) => {
-        //     this.setEvenListener(form)
-        // })
+ 
     }
 
     isValid(inputElement:HTMLInputElement, errorElement: HTMLSpanElement){
@@ -73,6 +67,4 @@ export class Validation {
         errorElement.textContent = ''
     }
     
-
-
 }
