@@ -8,8 +8,8 @@ import { AllModals } from "./modalUI";
 import { Basket } from "../buisness/basket";
 import { Product } from "../../types"
 import { Render } from "./render";
-
-export class BasketUi extends Render {
+import { Form } from "./form";
+export class BasketUi extends Form {
     addProductButton: Element
     basketList: HTMLElement
     basketCounter: Element
@@ -41,7 +41,7 @@ export class BasketUi extends Render {
             }
         })
         this.orderButton.addEventListener('click',()=>{
-            this.modal.openModal(this.modal.orderModal)
+            this.modal.openModal(this.orderModal)
         })
     }
 

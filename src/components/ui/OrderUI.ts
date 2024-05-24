@@ -1,8 +1,9 @@
 import { Order } from "../buisness/order";
+import { Form } from "./form";
 import { AllModals } from "./modalUI";
 
 
-export class OrderUI {
+export class OrderUI extends Form {
    orderButtons: NodeListOf<HTMLButtonElement>
    inputAdress: Element
    successDiscription: Element
@@ -12,8 +13,9 @@ export class OrderUI {
       'cash': 'received'
    }
    constructor(public modal: AllModals, public order: Order){
-      this.orderButtons = this.modal.orderModal.querySelectorAll('.button_alt')
-      this.inputAdress = this.modal.orderModal.querySelector('.form__input')
+      super()
+      this.orderButtons = this.orderModal.querySelectorAll('.button_alt')
+      this.inputAdress = this.orderModal.querySelector('.form__input')
       this.successDiscription = this.modal.successModal.querySelector('.order-success__description')
       
       this.orderButtons.forEach((button) => {
@@ -30,6 +32,11 @@ export class OrderUI {
 
             this.selectButton(target)
          })
+
+      })
+
+      this.setSubmitHandler(this.orderModal,  () => {
+         this.modal.openModal(this.contactsModal)
       })
 
       this.inputAdress.addEventListener('input', (event: Event)=> {
@@ -38,12 +45,11 @@ export class OrderUI {
          this.order.setParam('address',target.value)
       })
 
-      
 
-      this.modal.orderModal.addEventListener('submit', (event)=>{
-         event.preventDefault()
-         this.modal.openModal(this.modal.contactsModal)
-      })
+      // this.modal.orderModal.addEventListener('submit', (event)=>{
+      //    event.preventDefault()
+      //    this.modal.openModal(this.modal.contactsModal)
+      // })
    }
 
    selectButton(button: HTMLButtonElement) {
@@ -53,5 +59,9 @@ export class OrderUI {
             }
          })
          button.classList.add('button_alt-active')
+
+         
    }
+
+ 
 }

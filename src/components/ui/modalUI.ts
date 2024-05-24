@@ -6,10 +6,8 @@ export class AllModals extends Render {
     modals: NodeListOf<Element>
     cardModal: Element
     basketModal: Element
-    orderModal: Element
-    contactsModal: Element
     successModal: Element
-
+    successModalButton: HTMLButtonElement
      categoryModal:Element
      titleModal:Element
      textModal:Element
@@ -24,10 +22,9 @@ export class AllModals extends Render {
         this.modals = document.querySelectorAll('.modal')
         this.cardModal = (document.querySelector('#card-preview') as HTMLTemplateElement).content.querySelector('.card_full')
         this.basketModal = (document.querySelector('#basket') as HTMLTemplateElement).content.querySelector('.basket')
-        this.orderModal = (document.querySelector('#order') as HTMLTemplateElement).content.querySelector('.form')   
-        this.contactsModal = (document.querySelector('#contacts') as HTMLTemplateElement).content.querySelector('.form')   
         this.successModal = (document.querySelector ('#success') as HTMLTemplateElement).content.querySelector('.order-success')
         this.modalContent = this.modal.querySelector('.modal__content')
+        this.successModalButton = this.successModal.querySelector('.order-success__close')
 
         this.categoryModal = this.cardModal.querySelector('.card__category')
         this.titleModal = this.cardModal.querySelector('.card__title')
@@ -69,11 +66,11 @@ export class AllModals extends Render {
             if(target.classList.contains('modal') || target.classList.contains('modal__close')) {
                this.modal.classList.remove('modal_active') 
             }
+        })
 
-            this.successModal.addEventListener('click', ()=> {
+        this.successModalButton.addEventListener('click', ()=> {
                 this.modal.classList.remove('modal_active') 
             })
-        })
     }
 }
 

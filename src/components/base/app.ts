@@ -44,7 +44,7 @@ export class App {
             this.basket.selectedProduct = product
             this.modal.setModal(product)
             this.modal.openModal(this.modal.cardModal)
-        })
+        }).catch((console.error))
     }
 
     createOrder() {

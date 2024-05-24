@@ -1,11 +1,13 @@
 import { Order } from "../buisness/order"
+import { Form } from "./form"
 import { AllModals } from "./modalUI"
 
-export class ContactsUI {
+export class ContactsUI extends Form {
    contactsInputs:NodeListOf<HTMLInputElement>
 
     constructor(public modal: AllModals, public order: Order, onSubmit: () => void){
-        this.contactsInputs = this.modal.contactsModal.querySelectorAll('.form__input')
+        super()
+        this.contactsInputs = this.contactsModal.querySelectorAll('.form__input')
 
         
         this.contactsInputs.forEach((input)=> {
@@ -16,10 +18,7 @@ export class ContactsUI {
                 this.order.setParam(target.name, target.value)
             })
         })
-
-        this.modal.contactsModal.addEventListener('submit', (event)=> {
-                event.preventDefault()
-                onSubmit()
-        })
+            
+        this.setSubmitHandler(this.contactsModal, onSubmit )
     }       
 }
